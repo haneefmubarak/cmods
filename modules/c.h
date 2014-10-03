@@ -196,3 +196,26 @@ struct cmod_libc_string {
 	char*	(*strstr)	(const char *, const char *);
 	char*	(*strtok)	(char *, const char);
 };
+
+// single character type functions
+#include <ctype.h>
+
+struct cmod_libc_type {
+	// casing
+	int	(*tolower)	(int);
+	int	(*toupper)	(int);
+
+	// classification
+	int	(*isalnum)	(int);
+	int	(*isalpha)	(int);
+	int	(*isblank)	(int);
+	int	(*iscntrl)	(int);
+	int	(*isdigit)	(int);
+	int	(*isgraph)	(int);
+	int	(*islower)	(int);
+	int	(*isprint)	(int);
+	int	(*ispunct)	(int);
+	int	(*isspace)	(int);
+	int	(*isupper)	(int);
+	int	(*isxdigit)	(int);
+};
