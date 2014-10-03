@@ -219,3 +219,14 @@ struct cmod_libc_type {
 	int	(*isupper)	(int);
 	int	(*isxdigit)	(int);
 };
+
+// locale
+#include <locale.h>
+
+struct cmod_libc_locale {
+	struct lconv*	(*localeconv)	(void);
+	union {
+		char*		(*setlocale)	(int, const char *);
+		char*		(*set)		(int, const char *);
+	};
+};
