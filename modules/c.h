@@ -4,7 +4,7 @@
 
 #include "common.h"
 
-//	Standard Library
+// standard library
 #include <stdlib.h>
 
 struct cmods_libc_lib {
@@ -62,7 +62,7 @@ struct cmods_libc_lib {
 	lldiv_t		(*lldiv)	(long long, long long);
 };
 
-//	IO
+// IO
 #include <stdio.h>
 
 struct cmods_libc_io {
@@ -162,7 +162,7 @@ struct cmods_libc_io {
 	int	(*vsscanf)	(const char *, const char *, va_list);
 };
 
-//	strings
+// strings
 #include <string.h>
 
 struct cmod_libc_string {
