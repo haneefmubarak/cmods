@@ -61,3 +61,103 @@ struct cmods_libc_lib {
 	long long	(*llabs)	(long long);
 	lldiv_t		(*lldiv)	(long long, long long);
 };
+
+//	IO
+#include <stdio.h>
+
+struct cmods_libc_io {
+	// open / close etc.
+	union {
+		FILE*	(*fopen)	(const char *, const char *);
+		FILE*	(*open)		(const char *, const char *);
+	};
+	union {
+		FILE*	(*freopen)	(const char *, const char *, FILE *);
+		FILE*	(*reopen)	(const char *, const char *, FILE *);
+	};
+	union {
+		int	(*fflush)	(FILE *);
+		int	(*flush)	(FILE *);
+	};
+	union {
+		int	(*fclose)	(FILE *);
+		int	(*close)	(FILE *);
+	};
+	void	(*setbuf)	(FILE *, char *);
+	int	(*setvbuf)	(FILE *, char *, int, size_t);
+
+	// FS ops
+	union {
+		int	(*remove)	(const char *);
+		int	(*rm)		(const char *);
+	};
+	union {
+		int	(*rename)	(const char *);
+		int	(*mv)		(const char *);
+	};
+	FILE*	(*tmpfile)	(void);
+	char*	(*tmpname)	(char *);
+
+	// error handling
+	union {
+		int	(*feof)		(FILE *);
+		int	(*eof)		(FILE *);
+	};
+	int	(*ferror)	(FILE *);
+	void	(*perror)	(const char *);
+	void	(*clearerr)	(FILE *);
+
+	// positioning
+	void	(*rewind)	(FILE *);
+	union {
+		long	(*ftell)	(FILE *);
+		long	(*tell)		(FILE *);
+	};
+	union {
+		int	(*fseek)	(FILE *, long, int);
+		int	(*seek)		(FILE *, long, int);
+	};
+	union {
+		int	(*fgetpos)	(FILE *, fpos_t *);
+		int	(*getpos)	(FILE *, fpos_t *);
+	};
+	union {
+		int	(*fsetpos)	(FILE *, const fpos_t *);
+		int	(*setpos)	(FILE *, const fpos_t *);
+	};
+
+	// character IO
+	int	(*fgetc)	(FILE *);
+	char*	(*fgets)	(char *, int, FILE *);
+	int	(*fputc)	(int, FILE *);
+	int	(*fputs)	(const char *, FILE *);
+	int	(*getc)		(FILE *);
+	int	(*getchar)	(void);
+	char*	(*gets)		(char *);
+	int	(*putc)		(int, FILE *);
+	int	(*putchar)	(int);
+	int	(*puts)		(const char *);
+	int	(*ungetc)	(int, FILE *);
+
+	// printf
+	int	(*printf)	(const char *, ...);
+	int	(*fprintf)	(FILE *, const char *, ...);
+	int	(*sprintf)	(char *, const char *, ...);
+	int	(*snprintf)	(char *, size_t, const char *, ...);
+	int	(*asprintf)	(char **, const char *, ...);
+	int	(*dprintf)	(int, const char *, ...);
+	int	(*vprintf)	(const char *, va_list);
+	int	(*vfprintf)	(FILE *, const char *, va_list);
+	int	(*vsprintf)	(char *, const char *, va_list);
+	int	(*vsnprintf)	(char *, size_t, const char *, va_list);
+	int	(*vasprintf)	(char **, const char *, va_list);
+	int	(*vdprintf)	(int, const char *, va_list);
+
+	// scanf
+	int	(*scanf)	(const char *, ...);
+	int	(*fscanf)	(FILE *, const char *, ...);
+	int	(*sscanf)	(const char *, const char *, ...);
+	int	(*vscanf)	(const char *, va_list);
+	int	(*vfscanf)	(FILE *, const char *, va_list);
+	int	(*vsscanf)	(const char *, const char *, va_list);
+};
