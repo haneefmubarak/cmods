@@ -234,7 +234,7 @@ struct cmod_libc_locale {
 // signal handling
 #include <signal.h>
 
-struct	cmod_libc_signal {
+struct cmod_libc_signal {
 	void	(*(*signal)	(int, void (*func)(int)))(int);		// not going to even pretend I understand that syntax
 	int	(*raise)	(int);
 };
