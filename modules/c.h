@@ -256,3 +256,72 @@ struct cmod_libc_time {
 	struct tm*	(*gmtime)	(const time_t *);
 	struct tm*	(*localtime)	(const time_t *);
 };
+
+// floating point environment
+#include <fenv.h>
+
+struct cmod_libc_fenv {
+	// general
+	union {
+		int	(*fegetenv)	(fenv_t *);
+		int	(*getenv)	(fenv_t *);
+		int	(*get)		(fenv_t *);
+	};
+	union {
+		int	(*fesetenv)	(const fenv_t *);
+		int	(*setenv)	(const fenv_t *);
+		int	(*set)		(const fenv_t *);
+	};
+	union {
+		int	(*feupdateenv)	(const fenv_t *);
+		int	(*updateenv)	(const fenv_t *);
+		int	(*update)	(const fenv_t *);
+	};
+
+	// rounding
+	struct {
+		union {
+			int	(*fegetround)	(void);
+			int	(*getround)	(void);
+			int	(*get)		(void);
+		};
+		union {
+			int	(*fesetround)	(int);
+			int	(*setround)	(int);
+			int	(*set)		(int);
+		};
+	} round;
+
+	// FP exceptions
+	struct {
+		union {
+			int	(*feholdexcept)		(fenv_t *);
+			int	(*holdexcept)		(fenv_t *);
+			int	(*hold)			(fenv_t *);
+		};
+		union {
+			int	(*feclearexcept)	(int);
+			int	(*clearexcept)		(int);
+			int	(*clear)		(int);
+		};
+		union {
+			int	(*feraiseexcept)	(int);
+			int	(*raiseexcept)		(int);
+			int	(*raise)		(int);
+		};
+		struct {
+			union {
+				int	(*fegetexceptflag)	(fexcept_t *, int);
+				int	(*getexceptflag)	(fexcept_t *, int);
+				int	(*getflag)		(fexcept_t *, int);
+				int	(*get)			(fexcept_t *, int);
+			};
+			union {
+				int	(*fesetexceptflag)	(const fexcept_t *, int);
+				int	(*setexceptflag)	(const fexcept_t *, int);
+				int	(*setflag)		(const fexcept_t *, int);
+				int	(*set)			(const fexcept_t *, int);
+			};
+		} flag;
+	} except;
+};
