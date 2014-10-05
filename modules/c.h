@@ -238,3 +238,21 @@ struct	cmod_libc_signal {
 	void	(*(*signal)	(int, void (*func)(int)))(int);		// not going to even pretend I understand that syntax
 	int	(*raise)	(int);
 };
+
+// time
+#include <time.h>
+
+struct cmod_libc_time {
+	// general
+	clock_t		(*clock)	(void);
+	double		(*difftime)	(time_t, time_t);
+	time_t		(*mktime)	(struct tm *);
+	time_t		(*time)		(time_t *);
+
+	// type processing / conversion
+	size_t		(*strftime)	(char *, size_t, const char *, const struct tm *);
+	char*		(*asctime)	(const struct tm *);
+	char*		(*ctime)	(const time_t *);
+	struct tm*	(*gmtime)	(const time_t *);
+	struct tm*	(*localtime)	(const time_t *);
+};
