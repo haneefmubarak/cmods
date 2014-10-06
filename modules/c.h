@@ -511,3 +511,74 @@ struct cmods_libc_math {
 	float		(*scalblnf)	(float, long);
 	long double	(*scalblnl)	(long double, long);
 };
+
+// wide character type functions
+#include <wctype.h>
+
+struct cmods_libc_wtype {
+	// casing
+	union {
+		wint_t	(*towlower)	(wint_t);
+		wint_t	(*tolower)	(wint_t);
+	};
+	union {
+		wint_t	(*towupper)	(wint_t);
+		wint_t	(*toupper)	(wint_t);
+	};
+
+	// classification
+	union {
+		int	(*iswalnum)	(wint_t);
+		int	(*isalnum)	(wint_t);
+	};
+	union {
+		int	(*iswalpha)	(wint_t);
+		int	(*isalpha)	(wint_t);
+	};
+	union {
+		int	(*iswblank)	(wint_t);
+		int	(*isblank)	(wint_t);
+	};
+	union {
+		int	(*iswcntrl)	(wint_t);
+		int	(*iscntrl)	(wint_t);
+	};
+	union {
+		int	(*iswdigit)	(wint_t);
+		int	(*isdigit)	(wint_t);
+	};
+	union {
+		int	(*iswgraph)	(wint_t);
+		int	(*isgraph)	(wint_t);
+	};
+	union {
+		int	(*iswlower)	(wint_t);
+		int	(*islower)	(wint_t);
+	};
+	union {
+		int	(*iswprint)	(wint_t);
+		int	(*isprint)	(wint_t);
+	};
+	union {
+		int	(*iswpunct)	(wint_t);
+		int	(*ispunct)	(wint_t);
+	};
+	union {
+		int	(*iswspace)	(wint_t);
+		int	(*isspace)	(wint_t);
+	};
+	union {
+		int	(*iswupper)	(wint_t);
+		int	(*isupper)	(wint_t);
+	};
+	union {
+		int	(*iswxdigit)	(wint_t);
+		int	(*isxdigit)	(wint_t);
+	};
+
+	// misc
+	int		(*iswctype)	(wint_t, wctype_t);
+	wint_t		(*towctrans)	(wint_t, wctrans_t);
+	wctrans_t	(*wctrans)	(const char *);
+	wctype_t	(*wctype)	(const char *);
+};
