@@ -162,39 +162,115 @@ struct cmods_libc_io {
 	int	(*vsscanf)	(const char *, const char *, va_list);
 };
 
-// strings
+// strings and memory
 #include <string.h>
 
-struct cmods_libc_string {
+struct cmods_libc_str {
 	// general
-	size_t	(*strlen)	(const char *);
-	void*	(*memset)	(void *, int, size_t);
-	char*	(*strcat)	(char *, const char *);
-	char*	(*strncat)	(char *, const char *, size_t);
-	char*	(*strerror)	(int);
-	size_t	(*strxfrm)	(char *, const char *, size_t);
+	union {
+		size_t	(*strlen)	(const char *);
+		size_t	(*len)		(const char *);
+	};
+	union {
+		char*	(*strcat)	(char *, const char *);
+		char*	(*cat)		(char *, const char *);
+	};
+	union {
+		char*	(*strncat)	(char *, const char *, size_t);
+		char*	(*ncat)		(char *, const char *, size_t);
+	};
+	union {
+		char*	(*strerror)	(int);
+		char*	(*error)	(int);
+	};
+	union {
+		size_t	(*strxfrm)	(char *, const char *, size_t);
+		size_t	(*xfrm)		(char *, const char *, size_t);
+	};
 
 	// copying
-	void*	(*memcpy)	(void *, const void *, size_t);
-	char*	(*strcpy)	(char *, const char *);
-	char*	(*strncpy)	(char *, const char *, size_t);
-	void*	(*memmove)	(void *, const void *, size_t);
+	union {
+		char*	(*strcpy)	(char *, const char *);
+		char*	(*cpy)		(char *, const char *);
+	};
+	union {
+		char*	(*strncpy)	(char *, const char *, size_t);
+		char*	(*ncpy)		(char *, const char *, size_t);
+	};
 
 	// comparison
-	int	(*memcmp)	(const void *, const void *, size_t);
-	int	(*strcmp)	(const char *, const char *);
-	int	(*strncmp)	(const char *, const char *, size_t);
-	int	(*strcoll)	(const char *, const char *);
+	union {
+		int	(*strcmp)	(const char *, const char *);
+		int	(*cmp)		(const char *, const char *);
+	};
+	union {
+		int	(*strncmp)	(const char *, const char *, size_t);
+		int	(*ncmp)		(const char *, const char *, size_t);
+	};
+	union {
+		int	(*strcoll)	(const char *, const char *);
+		int	(*coll)		(const char *, const char *);
+	};
 
 	// searching
-	void*	(*memchr)	(const void *, int, size_t);
-	char*	(*strchr)	(const char *, int);
-	char*	(*strrchr)	(const char *, int);
-	size_t	(*strcspn)	(const char *, const char *);
-	size_t	(*strspn)	(const char *, const char *);
-	char*	(*strpbrk)	(const char *, const char *);
-	char*	(*strstr)	(const char *, const char *);
-	char*	(*strtok)	(char *, const char);
+	union {
+		char*	(*strchr)	(const char *, int);
+		char*	(*chr)		(const char *, int);
+	};
+	union {
+		char*	(*strrchr)	(const char *, int);
+		char*	(*rchr)		(const char *, int);
+	};
+	union {
+		size_t	(*strcspn)	(const char *, const char *);
+		size_t	(*cspn)		(const char *, const char *);
+	};
+	union {
+		size_t	(*strspn)	(const char *, const char *);
+		size_t	(*spn)		(const char *, const char *);
+	};
+	union {
+		char*	(*strpbrk)	(const char *, const char *);
+		char*	(*pbrk)		(const char *, const char *);
+	};
+	union {
+		char*	(*strstr)	(const char *, const char *);
+		char*	(*str)		(const char *, const char *);
+	};
+	union {
+		char*	(*strtok)	(char *, const char);
+		char*	(*tok)		(char *, const char);
+	};
+};
+
+struct cmods_libc_mem {
+	// general
+	union {
+		void*	(*memset)	(void *, int, size_t);
+		void*	(*set)		(void *, int, size_t);
+	};
+
+	// copying
+	union {
+		void*	(*memcpy)	(void *, const void *, size_t);
+		void*	(*cpy)		(void *, const void *, size_t);
+	};
+	union {
+		void*	(*memmove)	(void *, const void *, size_t);
+		void*	(*move)		(void *, const void *, size_t);
+	};
+
+	// comparison
+	union {
+		int	(*memcmp)	(const void *, const void *, size_t);
+		int	(*cmp)		(const void *, const void *, size_t);
+	};
+
+	// searching
+	union {
+		void*	(*memchr)	(const void *, int, size_t);
+		void*	(*chr)		(const void *, int, size_t);
+	};
 };
 
 // single character type functions
@@ -700,33 +776,106 @@ struct cmods_libc_wide_lib {
 
 struct cmods_libc_wide_string {
 	// general
-	size_t		(*wcslen)	(const wchar_t *);
-	wchar_t*	(*wmemset)	(wchar_t *, wchar_t, size_t);
-	wchar_t*	(*wcscat)	(wchar_t *, const wchar_t *);
-	wchar_t*	(*wcsncat)	(wchar_t *, const wchar_t *, size_t);
-	size_t		(*wcsxfrm)	(wchar_t *, const wchar_t *, size_t);
+	union {
+		size_t		(*wcslen)	(const wchar_t *);
+		size_t		(*len)		(const wchar_t *);
+	};
+	union {
+		wchar_t*	(*wcscat)	(wchar_t *, const wchar_t *);
+		wchar_t*	(*cat)		(wchar_t *, const wchar_t *);
+	};
+	union {
+		wchar_t*	(*wcsncat)	(wchar_t *, const wchar_t *, size_t);
+		wchar_t*	(*ncat)		(wchar_t *, const wchar_t *, size_t);
+	};
+	union {
+		size_t		(*wcsxfrm)	(wchar_t *, const wchar_t *, size_t);
+		size_t		(*xfrm)		(wchar_t *, const wchar_t *, size_t);
+	};
 
 	// copying
-	wchar_t*	(*wmemcpy)	(wchar_t *, const wchar_t *, size_t);
-	wchar_t*	(*wcscpy)	(wchar_t *, const wchar_t *);
-	wchar_t*	(*wcsncpy)	(wchar_t *, const wchar_t *, size_t);
-	wchar_t*	(*wmemmove)	(wchar_t *, const wchar_t *, size_t);
+	union {
+		wchar_t*	(*wcscpy)	(wchar_t *, const wchar_t *);
+		wchar_t*	(*cpy)		(wchar_t *, const wchar_t *);
+	};
+	union {
+		wchar_t*	(*wcsncpy)	(wchar_t *, const wchar_t *, size_t);
+		wchar_t*	(*ncpy)		(wchar_t *, const wchar_t *, size_t);
+	};
 
 	// comparison
-	int	(*wmemcmp)	(const wchar_t *, const wchar_t *, size_t);
-	int	(*wcscmp)	(const wchar_t *, const wchar_t *);
-	int	(*wcsncmp)	(const wchar_t *, const wchar_t *, size_t);
-	int	(*wcscoll)	(const wchar_t *, const wchar_t *);
+	union {
+		int	(*wcscmp)	(const wchar_t *, const wchar_t *);
+		int	(*cmp)		(const wchar_t *, const wchar_t *);
+	};
+	union {
+		int	(*wcsncmp)	(const wchar_t *, const wchar_t *, size_t);
+		int	(*ncmp)		(const wchar_t *, const wchar_t *, size_t);
+	};
+	union {
+		int	(*wcscoll)	(const wchar_t *, const wchar_t *);
+		int	(*coll)		(const wchar_t *, const wchar_t *);
+	};
 
 	// searching
-	wchar_t*	(*wmemchr)	(const wchar_t *, wchar_t, size_t);
-	wchar_t*	(*wcschr)	(const wchar_t *, wchar_t);
-	wchar_t*	(*wcsrchr)	(const wchar_t *, wchar_t);
-	size_t		(*wcscspn)	(const wchar_t *, const wchar_t *);
-	size_t		(*wcsspn)	(const wchar_t *, const wchar_t *);
-	wchar_t*	(*wcspbrk)	(const wchar_t *, const wchar_t *);
-	wchar_t*	(*wcsstr)	(const wchar_t *, const wchar_t *);
-	wchar_t*	(*wcstok)	(wchar_t *, const wchar_t *);
+	union {
+		wchar_t*	(*wcschr)	(const wchar_t *, wchar_t);
+		wchar_t*	(*chr)		(const wchar_t *, wchar_t);
+	};
+	union {
+		wchar_t*	(*wcsrchr)	(const wchar_t *, wchar_t);
+		wchar_t*	(*rchr)		(const wchar_t *, wchar_t);
+	};
+	union {
+		size_t		(*wcscspn)	(const wchar_t *, const wchar_t *);
+		size_t		(*cspn)		(const wchar_t *, const wchar_t *);
+	};
+	union {
+		size_t		(*wcsspn)	(const wchar_t *, const wchar_t *);
+		size_t		(*spn)		(const wchar_t *, const wchar_t *);
+	};
+	union {
+		wchar_t*	(*wcspbrk)	(const wchar_t *, const wchar_t *);
+		wchar_t*	(*pbrk)		(const wchar_t *, const wchar_t *);
+	};
+	union {
+		wchar_t*	(*wcsstr)	(const wchar_t *, const wchar_t *);
+		wchar_t*	(*str)		(const wchar_t *, const wchar_t *);
+	};
+	union {
+		wchar_t*	(*wcstok)	(wchar_t *, const wchar_t *);
+		wchar_t*	(*tok)		(wchar_t *, const wchar_t *);
+	};
+};
+
+struct cmods_libc_wide_mem {
+	// general
+	union {
+		wchar_t*	(*wmemset)	(wchar_t *, wchar_t, size_t);
+		wchar_t*	(*set)		(wchar_t *, wchar_t, size_t);
+	};
+
+	// copying
+	union {
+		wchar_t*	(*wmemcpy)	(wchar_t *, const wchar_t *, size_t);
+		wchar_t*	(*cpy)		(wchar_t *, const wchar_t *, size_t);
+	};
+	union {
+		wchar_t*	(*wmemmove)	(wchar_t *, const wchar_t *, size_t);
+		wchar_t*	(*move)		(wchar_t *, const wchar_t *, size_t);
+	};
+
+	// comparison
+	union {
+		int	(*wmemcmp)	(const wchar_t *, const wchar_t *, size_t);
+		int	(*cmp)		(const wchar_t *, const wchar_t *, size_t);
+	};
+
+	// searching
+	union {
+		wchar_t*	(*wmemchr)	(const wchar_t *, wchar_t, size_t);
+		wchar_t*	(*wchr)		(const wchar_t *, wchar_t, size_t);
+	};
 };
 
 struct cmods_libc_wide_time {
