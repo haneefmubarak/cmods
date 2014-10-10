@@ -582,3 +582,97 @@ struct cmods_libc_wtype {
 	wctrans_t	(*wctrans)	(const char *);
 	wctype_t	(*wctype)	(const char *);
 };
+
+// sets for wide chars
+#include <wchar.h>
+
+struct cmods_libc_wide_io {
+	// general
+	int	(*fwide)	(FILE *, int);
+
+	// character IO
+	union {
+		wint_t	(*fgetwc)	(FILE *);
+		wint_t	(*fgetc)	(FILE *);
+	};
+	union {
+		wchar_t*	(*fgetws)	(wchar_t *, int, FILE *);
+		wchar_t*	(*fgets)	(wchar_t *, int, FILE *);
+	};
+	union {
+		wint_t	(*fputwc)	(wchar_t, FILE *);
+		wint_t	(*fputc)	(wchar_t, FILE *);
+	};
+	union {
+		int	(*fputws)	(const wchar_t *, FILE *);
+		int	(*fputs)	(const wchar_t *, FILE *);
+	};
+	union {
+		int	(*getwc)	(FILE *);
+		int	(*getc)		(FILE *);
+	};
+	union {
+		wint_t	(*getwchar)	(void);
+		wint_t	(*getchar)	(void);
+	};
+	union {
+		wint_t	(*putwc)	(wchar_t, FILE *);
+		wint_t	(*putc)		(wchar_t, FILE *);
+	};
+	union {
+		wint_t	(*putwchar)	(wchar_t);
+		wint_t	(*putchar)	(wchar_t);
+	};
+	union {
+		wint_t	(*ungetwc)	(wint_t, FILE *);
+		wint_t	(*ungetc)	(wint_t, FILE *);
+	};
+
+	// printf
+	union {
+		int	(*wprintf)	(const wchar_t *, ...);
+		int	(*printf)	(const wchar_t *, ...);
+	};
+	union {
+		int	(*fwprintf)	(FILE *, const wchar_t *, ...);
+		int	(*fprintf)	(FILE *, const wchar_t *, ...);
+	};
+	union {
+		int	(*swprintf)	(wchar_t *, size_t, const wchar_t *, ...);
+		int	(*sprintf)	(wchar_t *, size_t, const wchar_t *, ...);
+	};
+	union {
+		int	(*vwprintf)	(const wchar_t *, va_list);
+		int	(*vprintf)	(const wchar_t *, va_list);
+	};
+	union {
+		int	(*vfwprintf)	(FILE *, const wchar_t *, va_list);
+		int	(*vfprintf)	(FILE *, const wchar_t *, va_list);
+	};
+	union {
+		int	(*vswprintf)	(wchar_t *, size_t, const wchar_t *, va_list);
+		int	(*vsprintf)	(wchar_t *, size_t, const wchar_t *, va_list);
+	};
+
+	//scanf
+	union {
+		int	(*wscanf)	(const wchar_t *, ...);
+		int	(*scanf)	(const wchar_t *, ...);
+	};
+	union {
+		int	(*fwscanf)	(FILE *, const wchar_t *, ...);
+		int	(*fscanf)	(FILE *, const wchar_t *, ...);
+	};
+	union {
+		int	(*swscanf)	(const wchar_t *, const wchar_t *, ...);
+		int	(*sscanf)	(const wchar_t *, const wchar_t *, ...);
+	};
+	union {
+		int	(*vwscanf)	(const wchar_t *, va_list);
+		int	(*vscanf)	(const wchar_t *, va_list);
+	};
+	union {
+		int	(*vswscanf)	(const wchar_t *, const wchar_t *, va_list);
+		int	(*vsscanf)	(const wchar_t *, const wchar_t *, va_list);
+	};
+};
