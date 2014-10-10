@@ -728,3 +728,7 @@ struct cmods_libc_wide_string {
 	wchar_t*	(*wcsstr)	(const wchar_t *, const wchar_t *);
 	wchar_t*	(*wcstok)	(wchar_t *, const wchar_t *);
 };
+
+struct cmods_libc_wide_time {
+	size_t	(*wcsftime)	(wchar_t *, size_t, const wchar_t *, const struct tm *);
+};
