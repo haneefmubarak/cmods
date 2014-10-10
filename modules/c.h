@@ -165,7 +165,7 @@ struct cmods_libc_io {
 // strings
 #include <string.h>
 
-struct cmod_libc_string {
+struct cmods_libc_string {
 	// general
 	size_t	(*strlen)	(const char *);
 	void*	(*memset)	(void *, int, size_t);
@@ -200,7 +200,7 @@ struct cmod_libc_string {
 // single character type functions
 #include <ctype.h>
 
-struct cmod_libc_type {
+struct cmods_libc_type {
 	// casing
 	int	(*tolower)	(int);
 	int	(*toupper)	(int);
@@ -223,7 +223,7 @@ struct cmod_libc_type {
 // locale
 #include <locale.h>
 
-struct cmod_libc_locale {
+struct cmods_libc_locale {
 	struct lconv*	(*localeconv)	(void);
 	union {
 		char*		(*setlocale)	(int, const char *);
@@ -234,7 +234,7 @@ struct cmod_libc_locale {
 // signal handling
 #include <signal.h>
 
-struct cmod_libc_signal {
+struct cmods_libc_signal {
 	void	(*(*signal)	(int, void (*func)(int)))(int);		// not going to even pretend I understand that syntax
 	int	(*raise)	(int);
 };
@@ -242,7 +242,7 @@ struct cmod_libc_signal {
 // time
 #include <time.h>
 
-struct cmod_libc_time {
+struct cmods_libc_time {
 	// general
 	clock_t		(*clock)	(void);
 	double		(*difftime)	(time_t, time_t);
@@ -260,7 +260,7 @@ struct cmod_libc_time {
 // floating point environment
 #include <fenv.h>
 
-struct cmod_libc_fenv {
+struct cmods_libc_fenv {
 	// general
 	union {
 		int	(*fegetenv)	(fenv_t *);
