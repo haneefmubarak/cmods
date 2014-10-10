@@ -676,3 +676,24 @@ struct cmods_libc_wide_io {
 		int	(*vsscanf)	(const wchar_t *, const wchar_t *, va_list);
 	};
 };
+
+struct cmods_libc_wide_lib {
+	// string conversion
+	double			(*wcstod)	(const wchar_t *, wchar_t **);
+	float			(*wcstof)	(const wchar_t *, wchar_t **);
+	long			(*wcstol)	(const wchar_t *, wchar_t **, int);
+	long double		(*wcstold)	(const wchar_t *, wchar_t **);
+	long long		(*wcstoll)	(const wchar_t *, wchar_t **, int);
+	unsigned long		(*wcstoul)	(const wchar_t *, wchar_t **, int);
+	unsigned long long	(*wcstoull)	(const wchar_t *, wchar_t **, int);
+
+	// monobyte (ironic, I know)
+	int	(*mbsinit)	(const mbstate_t *);
+	size_t	(*mbrlen)	(const char *, size_t, mbstate_t *);
+	size_t	(*mbrtowc)	(wchar_t *, const char *, size_t, mbstate_t *);
+	size_t	(*mbsrtowcs)	(wchar_t *, const char **, size_t, mbstate_t *);
+	int	(*wctob)	(wint_t);
+	wint_t	(*btowc)	(int);
+	size_t	(*wcsrtombs)	(char *, const wchar_t **, size_t, mbstate_t *);
+	size_t	(*wcrtomb)	(char *, wchar_t, mbstate_t *);
+};
