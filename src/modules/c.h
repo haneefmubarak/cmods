@@ -1,3 +1,4 @@
+#pragma once
 // libcmods - the c modules library
 //
 // libc

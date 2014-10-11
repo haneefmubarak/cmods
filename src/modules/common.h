@@ -1,3 +1,4 @@
+#pragma once
 // libcmods - the c modules library
 //
 // Copyright (c) 2014 Haneef Mubarak
