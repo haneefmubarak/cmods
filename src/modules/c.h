@@ -592,7 +592,7 @@ struct cmods_libc_math {
 // wide character type functions
 #include <wctype.h>
 
-struct cmods_libc_wtype {
+struct cmods_libc_wide_type {
 	// casing
 	union {
 		wint_t	(*towlower)	(wint_t);
@@ -775,7 +775,7 @@ struct cmods_libc_wide_lib {
 	size_t	(*wcrtomb)	(char *, wchar_t, mbstate_t *);
 };
 
-struct cmods_libc_wide_string {
+struct cmods_libc_wide_str {
 	// general
 	union {
 		size_t		(*wcslen)	(const wchar_t *);
@@ -881,4 +881,31 @@ struct cmods_libc_wide_mem {
 
 struct cmods_libc_wide_time {
 	size_t	(*wcsftime)	(wchar_t *, size_t, const wchar_t *, const struct tm *);
+};
+
+// bring it all together
+
+struct cmods_libc_wide {
+	struct cmods_libc_wide_type		type;
+	struct cmods_libc_wide_io	io;
+	struct cmods_libc_wide_lib	lib;
+	struct cmods_libc_wide_str	str;
+	struct cmods_libc_wide_mem	mem;
+	struct cmods_libc_wide_time	time;
+};
+
+struct cmods_libc {
+	struct cmods_libc_lib		lib;
+	struct cmods_libc_io		io;
+	struct cmods_libc_str		str;
+	struct cmods_libc_mem		mem;
+	struct cmods_libc_type		type;
+	struct cmods_libc_locale	locale;
+	struct cmods_libc_signal	signal;
+	struct cmods_libc_time		time;
+	struct cmods_libc_fenv		fenv;
+	struct cmods_libc_math		math;
+
+	// wide character
+	struct cmods_libc_wide		wide;
 };
