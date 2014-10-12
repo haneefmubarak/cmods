@@ -93,8 +93,8 @@ struct cmods_libc_io {
 		int	(*rm)		(const char *);
 	};
 	union {
-		int	(*rename)	(const char *);
-		int	(*mv)		(const char *);
+		int	(*rename)	(const char *, const char *);
+		int	(*mv)		(const char *, const char *);
 	};
 	FILE*	(*tmpfile)	(void);
 	char*	(*tmpname)	(char *);
@@ -134,7 +134,6 @@ struct cmods_libc_io {
 	int	(*fputs)	(const char *, FILE *);
 	int	(*getc)		(FILE *);
 	int	(*getchar)	(void);
-	char*	(*gets)		(char *);
 	int	(*putc)		(int, FILE *);
 	int	(*putchar)	(int);
 	int	(*puts)		(const char *);
@@ -239,8 +238,8 @@ struct cmods_libc_str {
 		char*	(*str)		(const char *, const char *);
 	};
 	union {
-		char*	(*strtok)	(char *, const char);
-		char*	(*tok)		(char *, const char);
+		char*	(*strtok)	(char *, const char *);
+		char*	(*tok)		(char *, const char *);
 	};
 };
 
@@ -499,9 +498,9 @@ struct cmods_libc_math {
 	double		(*cbrt)		(double);
 	float		(*cbrtf)	(float);
 	long double	(*cbrtl)	(long double);
-	double		(*hypo)		(double, double);
-	float		(*hypof)	(float, float);
-	long double	(*hypol)	(long double, long double);
+	double		(*hypot)	(double, double);
+	float		(*hypotf)	(float, float);
+	long double	(*hypotl)	(long double, long double);
 
 	// trig and hyp functions
 	double		(*sin)		(double);
@@ -671,6 +670,8 @@ struct cmods_libc_wide_io {
 	union {
 		wint_t	(*fgetwc)	(FILE *);
 		wint_t	(*fgetc)	(FILE *);
+		wint_t	(*getwc)	(FILE *);
+		wint_t	(*getc)		(FILE *);
 	};
 	union {
 		wchar_t*	(*fgetws)	(wchar_t *, int, FILE *);
@@ -683,10 +684,6 @@ struct cmods_libc_wide_io {
 	union {
 		int	(*fputws)	(const wchar_t *, FILE *);
 		int	(*fputs)	(const wchar_t *, FILE *);
-	};
-	union {
-		int	(*getwc)	(FILE *);
-		int	(*getc)		(FILE *);
 	};
 	union {
 		wint_t	(*getwchar)	(void);
@@ -844,8 +841,8 @@ struct cmods_libc_wide_str {
 		wchar_t*	(*str)		(const wchar_t *, const wchar_t *);
 	};
 	union {
-		wchar_t*	(*wcstok)	(wchar_t *, const wchar_t *);
-		wchar_t*	(*tok)		(wchar_t *, const wchar_t *);
+		wchar_t*	(*wcstok)	(wchar_t *, const wchar_t *, wchar_t **);
+		wchar_t*	(*tok)		(wchar_t *, const wchar_t *, wchar_t **);
 	};
 };
 
@@ -875,7 +872,7 @@ struct cmods_libc_wide_mem {
 	// searching
 	union {
 		wchar_t*	(*wmemchr)	(const wchar_t *, wchar_t, size_t);
-		wchar_t*	(*wchr)		(const wchar_t *, wchar_t, size_t);
+		wchar_t*	(*chr)		(const wchar_t *, wchar_t, size_t);
 	};
 };
 
@@ -909,3 +906,5 @@ struct cmods_libc {
 	// wide character
 	struct cmods_libc_wide		wide;
 };
+
+extern const struct cmods_libc c;
