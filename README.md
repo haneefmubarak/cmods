@@ -38,7 +38,7 @@ In your project folder, create two files:
 
 #### cmods.c
 
-Here, include whatever cmods packages that you want:
+Here, include whatever `cmods` packages that you want:
 
 ```c
 // cmods.c
