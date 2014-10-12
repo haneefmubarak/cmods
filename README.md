@@ -84,6 +84,14 @@ files, you can just do this:
 #include "cmods.h"
 ```
 
+finding functions
+-----------------
+
+Many functions in `cmods` may have significantly
+different names. As such, the easiest way to find
+the new names for functions is to search for the
+original name in `src/<package_name>.h`.
+
 compatibility
 -------------
 
