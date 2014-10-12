@@ -4,6 +4,8 @@ cmods
 A header-only library for C that rewrites some popular
 libraries' headers in a more modular form.
 
+Have a look at the list of [packages](./PACKAGES.md).
+
 the story
 ---------
 
